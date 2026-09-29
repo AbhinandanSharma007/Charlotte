@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.theme-professional {
+  --bg-dark: #06090f;
+  --bg-panel: #0d131f;
+  --bg-panel-hover: #141d2e;
+  --bg-card: #111a2b;
+  --border-color: #1e2b42;
+  --border-focus: #3b82f6;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #ffffff;
+  --accent-red: #ef4444;
+  --accent-blue: #3b82f6;
+  --color-positive: #10b981;
+  --color-positive-bg: rgba(16, 185, 129, 0.15);
+  --color-positive-border: rgba(16, 185, 129, 0.4);
+  --color-theft: #ef4444;
+  --color-theft-bg: rgba(239, 68, 68, 0.15);
+  --color-theft-border: rgba(239, 68, 68, 0.4);
+  --shadow-glow: 0 0 15px rgba(59, 130, 246, 0.25);
+}
+
+.theme-spiderman {
+  --bg-dark: #07080d;
+  --bg-panel: #11131c;
+  --bg-panel-hover: #181b28;
+  --bg-card: #141624;
+  --border-color: rgba(239, 68, 68, 0.3);
+  --border-focus: #ef4444;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-primary: #ef4444;
+  --accent-secondary: #2563eb;
+  --accent-red: #ef4444;
+  --accent-blue: #2563eb;
+  --color-positive: #10b981;
+  --color-positive-bg: rgba(16, 185, 129, 0.16);
+  --color-positive-border: rgba(16, 185, 129, 0.45);
+  --color-theft: #ef4444;
+  --color-theft-bg: rgba(239, 68, 68, 0.2);
+  --color-theft-border: rgba(239, 68, 68, 0.6);
+  --shadow-glow: 0 0 18px rgba(239, 68, 68, 0.35);
+}
+
+.theme-cyberpunk {
+  --bg-dark: #070210;
+  --bg-panel: #120625;
+  --bg-panel-hover: #1c0b38;
+  --bg-card: #170830;
+  --border-color: rgba(0, 240, 255, 0.35);
+  --border-focus: #ffe600;
+  --text-main: #ffffff;
+  --text-muted: #c084fc;
+  --accent-primary: #ffe600;
+  --accent-secondary: #00f0ff;
+  --accent-red: #ff007f;
+  --accent-blue: #00f0ff;
+  --color-positive: #00ff88;
+  --color-positive-bg: rgba(0, 255, 136, 0.2);
+  --color-positive-border: rgba(0, 255, 136, 0.5);
+  --color-theft: #ff007f;
+  --color-theft-bg: rgba(255, 0, 127, 0.2);
+  --color-theft-border: rgba(255, 0, 127, 0.5);
+  --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.theme-dark {
+  --bg-dark: #0b0f19;
+  --bg-panel: #131c2e;
+  --bg-panel-hover: #1a263d;
+  --bg-card: #182236;
+  --border-color: #24324a;
+  --border-focus: #38bdf8;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --accent-red: #ef4444;
+  --accent-blue: #38bdf8;
+  --color-positive: #10b981;
+  --color-positive-bg: rgba(16, 185, 129, 0.15);
+  --color-positive-border: rgba(16, 185, 129, 0.4);
+  --color-theft: #ef4444;
+  --color-theft-bg: rgba(239, 68, 68, 0.15);
+  --color-theft-border: rgba(239, 68, 68, 0.4);
+  --shadow-glow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.theme-light {
+  --bg-dark: #f4f6fb;
+  --bg-panel: #ffffff;
+  --bg-panel-hover: #f8fafc;
+  --bg-card: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-focus: #2563eb;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent-primary: #2563eb;
+  --accent-secondary: #4f46e5;
+  --accent-red: #dc2626;
+  --accent-blue: #2563eb;
+  --color-positive: #16a34a;
+  --color-positive-bg: rgba(22, 163, 74, 0.12);
+  --color-positive-border: rgba(22, 163, 74, 0.3);
+  --color-theft: #dc2626;
+  --color-theft-bg: rgba(220, 38, 38, 0.12);
+  --color-theft-border: rgba(220, 38, 38, 0.3);
+  --shadow-glow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    @apply antialiased min-h-screen;
+  }
+}
+
+@layer components {
+  .panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-glow);
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    @apply rounded-xl p-5;
+  }
+
+  .stat-card {
+    @apply panel flex flex-col gap-1;
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium;
+  }
+
+  .nav-link:hover {
+    background-color: var(--bg-panel-hover);
+    color: var(--text-main);
+  }
+
+  .nav-link-active {
+    background-color: var(--accent-primary);
+    color: var(--bg-panel);
+    border: 1px solid var(--accent-secondary);
+    box-shadow: 0 0 12px var(--accent-primary);
+  }
+
+  .theme-spiderman .nav-link-active {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f8fafc;
+    border: 1px solid #ef4444;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+  }
+
+  .theme-cyberpunk .nav-link-active {
+    background-color: rgba(255, 230, 0, 0.2);
+    color: #ffe600;
+    border: 1px solid #ffe600;
+    box-shadow: 0 0 14px rgba(255, 230, 0, 0.5);
+  }
+
+  .theme-professional .nav-link-active {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #ffffff;
+    border: 1px solid #3b82f6;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  }
+
+  .theme-dark .nav-link-active {
+    background-color: rgba(56, 189, 248, 0.2);
+    color: #f1f5f9;
+    border: 1px solid #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  }
+
+  .theme-light .nav-link-active {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #1e3a8a;
+    border: 1px solid #2563eb;
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Badge System */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+
+  /* Green Positive Indication Badges */
+  .badge-positive,
+  .badge-clean,
+  .badge-healthy {
+    background-color: var(--color-positive-bg);
+    color: var(--color-positive);
+    border: 1px solid var(--color-positive-border);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);
+  }
+
+  .badge-critical,
+  .badge-theft {
+    background-color: var(--color-theft-bg);
+    color: var(--color-theft);
+    border: 1px solid var(--color-theft-border);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.25);
+  }
+
+  .badge-high {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/30;
+  }
+
+  .badge-medium {
+    @apply badge bg-sky-500/15 text-sky-400 border border-sky-500/30;
+  }
+
+  .badge-low {
+    @apply badge bg-slate-500/15 text-slate-400 border border-slate-500/30;
+  }
+
+  /* Glowing indicators */
+  .glow-green {
+    box-shadow: 0 0 12px var(--color-positive);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 12px var(--color-theft);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 12px var(--accent-blue);
+  }
+}

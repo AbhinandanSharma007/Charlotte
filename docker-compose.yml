@@ -1,0 +1,92 @@
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: charlotte-postgres
+    environment:
+      POSTGRES_USER: charlotte
+      POSTGRES_PASSWORD: charlotte_dev
+      POSTGRES_DB: charlotte
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U charlotte"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: charlotte-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: charlotte-mqtt
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./infrastructure/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: charlotte-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://charlotte:charlotte_dev@postgres:5432/charlotte
+      REDIS_URL: redis://redis:6379/0
+      MQTT_BROKER: mqtt://mqtt:1883
+      SECRET_KEY: charlotte-dev-secret-change-in-production
+      CORS_ORIGINS: http://localhost:5173
+      KUMO_NIM_URL: http://kumo-nim:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  kumo-nim:
+    image: nvcr.io/nim/nvidia/kumo-relational:1.0.0
+    profiles: ["kumo"]
+    ports:
+      - "8001:8000"
+    shm_size: 16gb
+    gpus: all
+    environment:
+      NGC_API_KEY: ${NGC_API_KEY:-}
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: charlotte-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+
+volumes:
+  postgres_data:
+  redis_data:

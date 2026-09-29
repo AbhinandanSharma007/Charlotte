@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.db
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# AI models
+models/*.pt
+models/*.pkl
+
+# Secrets
+.env.local
+.env.production
+
+# Workspace metadata
+.kilo/
+.stubs/
+.vfsmeta/
+.work-folder-info

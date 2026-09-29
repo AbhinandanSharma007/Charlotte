@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+alembic
+pydantic
+pydantic-settings
+python-jose
+passlib[bcrypt]
+redis
+paho-mqtt
+kafka-python
+minio
+prometheus-client
+python-multipart

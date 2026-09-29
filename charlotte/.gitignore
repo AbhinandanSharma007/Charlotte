@@ -1,0 +1,31 @@
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# VSCode
+.vscode/
+
+# JetBrains
+.idea/
+
+# Logs
+*.log
+
+# Database
+postgres-data/
+redis-data/
+grafana-data/
+minio-data/
+
+# Docker
+*.pid
+
+# OS
+.DS_Store
+Thumbs.db

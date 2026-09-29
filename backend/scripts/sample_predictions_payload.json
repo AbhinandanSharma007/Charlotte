@@ -1,0 +1,28 @@
+{
+  "source": "trained-model-service",
+  "batch_id": "model-run-2026-08-11",
+  "predictions": [
+    {
+      "meter_id": "00000000-0000-0000-0000-000000000000",
+      "prediction_type": "theft",
+      "probability": 0.86,
+      "confidence": 0.94,
+      "expected_window_start": "2026-08-12T00:00:00Z",
+      "expected_window_end": "2026-08-18T00:00:00Z",
+      "revenue_impact": 3100.0,
+      "explanation": {
+        "reasons": [
+          "Night consumption increased 38% vs baseline",
+          "Transformer load imbalance detected",
+          "Behavioral profile deviation exceeded threshold"
+        ]
+      },
+      "model_version": "HQNN-v1.0",
+      "top_feature_importance": {
+        "night_consumption_ratio": 0.38,
+        "load_variance": 0.22,
+        "deviation_score": 0.11
+      }
+    }
+  ]
+}
